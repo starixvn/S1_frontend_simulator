@@ -1,0 +1,190 @@
+import Nanoid from "~/utils/CustomNanoid";
+import data from "../../seed-data/betData.json";
+import { DateHelper, NumberHelper } from "../utils";
+
+const requestPrefix = 'loadtest_';
+
+export const getPlaceBetParlayRequest = (userId: string) => {
+  const now = DateHelper.formatCurrentDateTime();
+
+  const betData = {
+    key: Nanoid(10),
+    message: {
+      ...data.PlaceBetParlay.message,
+      OperationId: Nanoid(20),
+      UserId: userId,
+      BetTime: now,
+      UpdateTime: now,
+      CreditAmount: 0,
+      Txns: data.PlaceBetParlay.message.Txns.map((item) => ({
+        ...item,
+        RefId: `${requestPrefix}${Nanoid(15)}`,
+      })),
+    },
+  };
+
+  return betData;
+};
+
+export const getConfirmBetParlayRequest = (
+  placeBetRequest,
+  placeBetResponse
+) => {
+  const { UserId, UpdateTime, CreditAmount, DebitAmount } = placeBetRequest.message;
+
+  const getTicketDetail = (ticketDetail) => ({
+    MatchId: ticketDetail.MatchId,
+    SportType: ticketDetail.SportType,
+    BetType: ticketDetail.BetType,
+    OddsId: ticketDetail.OddsId,
+    Odds: ticketDetail.Odds,
+    OddsType: ticketDetail.OddsType,
+    LeagueId: ticketDetail.LeagueId,
+    IsOddsChanged: Math.random() >= 0.5,
+  });
+
+  return {
+    key: Nanoid(10),
+    message: {
+      ...data.ConfirmBetParlay.message,
+      OperationId: Nanoid(20),
+      UserId: UserId,
+      UpdateTime: UpdateTime,
+      CreditAmount: CreditAmount,
+      DebitAmount: DebitAmount,
+      TransactionTime: UpdateTime,
+      Txns: placeBetRequest.message.Txns.map((item, index) => ({
+        ...data.ConfirmBetParlay.message.Txns[0],
+        LicenseeTxId: placeBetResponse.txns[index].licenseeTxId,
+        RefId: placeBetRequest.message.Txns[index].RefId,
+        ActualAmount: placeBetRequest.message.Txns[index].BetAmount,
+        TxId: NumberHelper.generateRandomNumber(18),
+      })),
+      TicketDetail: placeBetRequest.message.TicketDetail.map(getTicketDetail),
+    },
+  };
+};
+
+export const getCancelBetParlayRequest = (placeBetRequest) => {
+  const { UserId } = placeBetRequest.message;
+
+  const betData = {
+    key: Nanoid(10),
+    message: {
+      ...data.CancelBet.message,
+      OperationId: Nanoid(20),
+      UserId: UserId,
+      Txns: placeBetRequest.message.Txns.map((item) => ({
+        ...data.CancelBet.message.Txns[0],
+        CreditAmount: item.DebitAmount,
+        DebitAmount: item.CreditAmount,
+        RefId: item.RefId,
+      })),
+    },
+  };
+  return betData;
+};
+
+export const getSettleBetParlayRequest = (
+  placeBetRequest,
+  confirmBetRequest
+) => {
+  const { UserId } = placeBetRequest.message;
+
+  const betData = {
+    key: Nanoid(10),
+
+    message: {
+      ...data.Settle.message,
+      OperationId: Nanoid(20),
+      Txns: placeBetRequest.message.Txns.map((item, index) => {
+        let actualAmount = confirmBetRequest.message.Txns[index].ActualAmount;
+        const odds = confirmBetRequest.message.Txns[index].Odds;
+        const isWon = data.Settle.message.Txns[0].Status === "won";
+        if (Boolean(odds) && isWon) {
+          actualAmount += actualAmount * odds;
+        }
+
+        return {
+          ...data.Settle.message.Txns[0],
+          UserId: UserId,
+          RefId: confirmBetRequest.message.Txns[index].RefId,
+          TxId: confirmBetRequest.message.Txns[index].TxId,
+          Payout: actualAmount,
+          CreditAmount: actualAmount,
+        };
+      }),
+    },
+  };
+
+  return betData;
+};
+
+export const getResettleParlayBetRequest = (
+  placeBetRequest,
+  confirmBetRequest,
+  settleBetRequest
+) => {
+  const { UserId } = placeBetRequest.message;
+
+  const betData = {
+    key: Nanoid(10),
+    message: {
+      ...data.ReSettle.message,
+      OperationId: Nanoid(20),
+      Txns: placeBetRequest.message.Txns.map((item, index) => {
+        const { Payout, Status } = settleBetRequest.message.Txns[index];
+        const finalBetData =
+          Status === "won"
+            ? {
+                Payout: Payout,
+                CreditAmount: Payout,
+                DebitAmount: 0,
+                Status,
+              }
+            : {
+                Payout: 0,
+                CreditAmount: 0,
+                DebitAmount: Payout,
+                Status,
+              };
+
+        return {
+          ...data.ReSettle.message.Txns[0],
+          ...finalBetData,
+          UserId: UserId,
+          RefId: confirmBetRequest.message.Txns[index].RefId,
+          TxId: confirmBetRequest.message.Txns[index].TxId,
+        };
+      }),
+    },
+  };
+  return betData;
+};
+
+export const getUnsettleParlayBetRequest = (
+  placeBetRequest,
+  settleBetRequest,
+) => {
+  const { UserId } = placeBetRequest.message;
+
+  const betData = {
+    key: Nanoid(10),
+    message: {
+      ...data.UnSettle.message,
+      OperationId: Nanoid(20),
+      Txns: placeBetRequest.message.Txns.map((item, index) => {
+        const { Payout, Status } = settleBetRequest.message.Txns[index];
+        return {
+          ...data.UnSettle.message.Txns[0],
+          UserId: UserId,
+          RefId: settleBetRequest.message.Txns[index].RefId,
+          TxId: settleBetRequest.message.Txns[index].TxId,
+          CreditAmount: Status == "won" ? Payout : 0,
+          DebitAmount: Status == "won" ? 0 : Payout,
+        };
+      }),
+    },
+  };
+  return betData;
+};
