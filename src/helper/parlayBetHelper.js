@@ -10,7 +10,7 @@ import {
   unSettleBetApi,
 } from "../services/api";
 import data from "../constant/Data.json";
-import store from "../store/store";
+import store from "../store";
 import { nanoid } from "nanoid";
 import { formatCurrentDateTime } from "./datetimeHelper";
 

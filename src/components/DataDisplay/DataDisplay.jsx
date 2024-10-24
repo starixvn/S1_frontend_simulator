@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { betLookup } from "../../helper";
@@ -14,14 +13,15 @@ import {
 import { nanoid } from "nanoid";
 import SimulatorTab from "../Tab/SimulatorTab";
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
+import { useTypedDispatch, useTypedSelector } from "../../store";
 
 const DataDisplay = ({ children }) => {
   const requestRef = useRef(null);
-  const dispatch = useDispatch();
-  const { betData, betRetryData, currentState, scheduleData } = useSelector(
-    (state) => state.singleBet
-  );
-  const tabValue = useSelector((state) => state.tabSimulator.tabValue);
+  const dispatch = useTypedDispatch();
+  const { betData, betRetryData, currentState, scheduleData } = useTypedSelector((state) => state.singleBet);
+  const tabValue = useTypedSelector((state) => state.tabSimulator.tabValue);
+  const clickedButtons = useTypedSelector((state) => state.singleBet.clickedButtons);
+
   const dataDisplay = Boolean(currentState.retryId)
     ? betRetryData[currentState.type].find(
         (x) => x.retryId === currentState.retryId
@@ -30,7 +30,6 @@ const DataDisplay = ({ children }) => {
 
   const [loading, setLoading] = useState(false);
 
-  const clickedButtons = useSelector((state) => state.singleBet.clickedButtons);
   const isViewData = clickedButtons
     .filter((item) => item !== "cancelBetParlay" && item !== "cancelBet")
     .includes(currentState.type);

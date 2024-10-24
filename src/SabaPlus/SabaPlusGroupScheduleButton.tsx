@@ -6,6 +6,7 @@ import {
   updateCurrentState,
 } from "../store/slices/sabaPlusSlice";
 import { sabaPlusLookup } from "../helper/sabaPlusHelper";
+import { useTypedDispatch } from "../store";
 
 type Props = {
   headerText: string;
@@ -19,7 +20,7 @@ const SabaPlusGroupScheduleButton = ({
   className,
   children,
 }: Props) => {
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
   const [intervalValue, setIntervalValue] = useState(null);
   const [loopValue, setLoopValue] = useState(null);
 

@@ -6,13 +6,15 @@ import {
   updateCurrentState,
 } from "../../store/slices/singleBetSlice";
 import { betLookup } from "../../helper";
+import { useTypedDispatch, useTypedSelector } from "../../store";
 type Props = {
   headerText: string;
   handleClick: (button: string) => void;
 };
+
 const GroupAutoButton = ({ headerText }: Props) => {
-  const dispatch = useDispatch();
-  const userId = useSelector((state) => state.userInfo.userId);
+  const dispatch = useTypedDispatch();
+  const userId = useTypedSelector((state) => state.userInfo.userId);
 
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 

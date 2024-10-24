@@ -15,11 +15,12 @@ import SabaPlusGroupAutoButton from "./SabaPlusGroupAutoButton";
 import SabaPlusGroupScheduleButton from "./SabaPlusGroupScheduleButton";
 import BetResultCheckButtonGroup from "./BetResultCheckButtonGroup";
 import SabaPlusGroupVendorOption from "./SabaPlusGroupVendorOption";
+import { useTypedDispatch, useTypedSelector } from "../store";
 const SabaPlusPopup = () => {
-  const dispatch = useDispatch();
-  const clickedButtons = useSelector((state) => state.sabaPlus.clickedButtons);
-  const nextButtons = useSelector((state) => state.sabaPlus.nextButtons);
-  const userId = useSelector((state) => state.userInfo.userId);
+  const dispatch = useTypedDispatch();
+  const clickedButtons = useTypedSelector((state) => state.sabaPlus.clickedButtons);
+  const nextButtons = useTypedSelector((state) => state.sabaPlus.nextButtons);
+  const userId = useTypedSelector((state) => state.userInfo.userId);
   const handleFlowClick = (key) => {
     dispatch(updateCurrentState({ type: key, retryId: null }));
   };

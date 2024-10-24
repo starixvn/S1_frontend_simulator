@@ -60,6 +60,10 @@ const initialState = {
       request: null,
       response: null,
     },
+    ticketDetail: {
+      request: null,
+      response: null,
+    },
   },
   betRetryData: {
     placeBetParlay: [],

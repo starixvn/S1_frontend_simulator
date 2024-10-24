@@ -6,6 +6,7 @@ import {
   updateCurrentState,
   updateScheduleData,
 } from "../../store/slices/singleBetSlice";
+import { useTypedDispatch } from "../../store";
 type Props = {
   headerText: string;
   buttons: string[];
@@ -21,7 +22,7 @@ const GroupScheduleButton = ({
 }: Props) => {
   const [intervalValue, setIntervalValue] = useState(null);
   const [loopValue, setLoopValue] = useState(null);
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
 
   const handleOnclickScheduleButton = (key) => {
     if (!intervalValue || !loopValue) {

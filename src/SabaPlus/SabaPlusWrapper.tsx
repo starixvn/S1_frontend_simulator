@@ -1,4 +1,3 @@
-//@ts-nocheck
 import React from "react";
 import SabaPlusDataDisplay from "./SabaPlusDataDisplay";
 import TabPanel from "@mui/lab/TabPanel";

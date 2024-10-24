@@ -6,13 +6,14 @@ import {
 } from "../store/slices/userInfoSlice";
 import { balanceData } from "../constant/SabaPlusData.json";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
-import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useTypedDispatch, useTypedSelector } from "../store";
 
 const SabaPlusUserInfo = () => {
-  const { userId, balance } = useSelector((state) => state.userInfo);
+  const dispatch = useTypedDispatch();
+
+  const { userId, balance } = useTypedSelector((state) => state.userInfo);
   const [userIdInput, setUserIdInput] = useState("");
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {

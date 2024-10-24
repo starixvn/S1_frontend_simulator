@@ -12,14 +12,15 @@ import {
 import { addBetResultTicket } from "../store/slices/betResultCheckSlice";
 import { sabaPlusLookup } from "../helper/sabaPlusHelper";
 import LoadingOverlay from "../components/LoadingOverlay/LoadingOverlay";
+import { useTypedDispatch, useTypedSelector } from "../store";
 
 const SabaPlusDataDisplay = () => {
+  const dispatch = useTypedDispatch();
+  const { betData, currentState, clickedButtons, betRetryData, scheduleData } = useTypedSelector((state) => state.sabaPlus);
+  const tabValue = useTypedSelector((state) => state.tabSimulator.tabValue);
+
   const requestRef = useRef(null);
-  const dispatch = useDispatch();
-  const { betData, currentState, clickedButtons, betRetryData, scheduleData } =
-    useSelector((state) => state.sabaPlus);
   const [loading, setLoading] = useState(false);
-  const tabValue = useSelector((state) => state.tabSimulator.tabValue);
 
   const dataDisplay = currentState.retryId
     ? betRetryData[currentState.type].find(

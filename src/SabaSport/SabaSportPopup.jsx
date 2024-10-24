@@ -4,21 +4,26 @@ import {
   updateDisplayData,
   updateCurrentState,
   restartSingleBetStore,
-} from "../../store/slices/singleBetSlice";
-import UserInfo from "../UserInfo/UserInfo";
-import { betLookup } from "../../helper";
+} from "../store/slices/singleBetSlice";
+import UserInfo from "../components/UserInfo/UserInfo";
+import { betLookup } from "../helper";
 import { useState } from "react";
-import GroupButton from "../GroupButton/GroupButton";
-import GroupAutoButton from "../GroupAutoButton/GroupAutoButton";
-import GroupAPIFlowButton from "../GroupAPIFlowButton/GroupAPIFlowButton";
-import GroupScheduleButton from "../GroupScheduleButton/GroupScheduleButton";
-import SabaIcon from "../SabaIcon/SabaIcon";
+import GroupButton from "../components/GroupButton/GroupButton";
+import GroupAutoButton from "../components/GroupAutoButton/GroupAutoButton";
+import GroupAPIFlowButton from "../components/GroupAPIFlowButton/GroupAPIFlowButton";
+import GroupScheduleButton from "../components/GroupScheduleButton/GroupScheduleButton";
+import SabaIcon from "../components/SabaIcon/SabaIcon";
 import TabPanel from "@mui/lab/TabPanel";
-const Popup = () => {
-  const dispatch = useDispatch();
-  const clickedButtons = useSelector((state) => state.singleBet.clickedButtons);
-  const nextButtons = useSelector((state) => state.singleBet.nextButtons);
-  const userId = useSelector((state) => state.userInfo.userId);
+import { useTypedDispatch, useTypedSelector } from "../store";
+import SabaSportBetDetails from "./SabaSportBetDetails";
+import SabaSportTicketDetailsOption from "./SabaSportTicketDetailsOption";
+const SabaSportPopup = () => {
+  const dispatch = useTypedDispatch();
+  const clickedButtons = useTypedSelector(
+    (state) => state.singleBet.clickedButtons
+  );
+  const nextButtons = useTypedSelector((state) => state.singleBet.nextButtons);
+  const userId = useTypedSelector((state) => state.userInfo.userId);
 
   const handleFlowClick = (key) => {
     dispatch(updateCurrentState({ type: key, retryId: null }));
@@ -48,6 +53,11 @@ const Popup = () => {
         ></SabaIcon>
         <UserInfo></UserInfo>
       </div>
+      <TabPanel value="manual">
+        <div className="popup-body">
+          <SabaSportTicketDetailsOption headerText="Ticket Details" />
+        </div>
+      </TabPanel>
       <div className="popup-body">
         <TabPanel value="automate">
           <GroupAutoButton
@@ -104,4 +114,4 @@ const Popup = () => {
   );
 };
 
-export default Popup;
+export default SabaSportPopup;

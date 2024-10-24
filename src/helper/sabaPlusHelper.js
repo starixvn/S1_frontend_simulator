@@ -1,6 +1,6 @@
 import spPlusData from "../constant/SabaPlusData.json";
 import moment from "moment-timezone";
-import store from "../store/store";
+import store from "../store";
 import {
   placeBetApi,
   endGameApi,

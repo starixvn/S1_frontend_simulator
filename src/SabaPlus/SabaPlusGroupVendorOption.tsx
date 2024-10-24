@@ -5,7 +5,8 @@ import {
   restartSabaPlusStore,
   updateVendorOption,
 } from "../store/slices/sabaPlusSlice";
-import {  Provider, ProviderGameTypes } from "../constant/Provider";
+import {  GameType, Provider, ProviderGameTypes } from "../constant/Provider";
+import { useTypedDispatch, useTypedSelector } from "../store";
 
 const isUseSimulatorProvider = import.meta.env.VITE_USE_SIMULATOR_PROVIDER;
 
@@ -26,8 +27,8 @@ type Props = {
 };
 
 const SabaPlusGroupVendorOption = ({ headerText }: Props) => {
-  const dispatch = useDispatch();
-  const vendor = useSelector((state) => state.sabaPlus.vendorOptions);
+  const dispatch = useTypedDispatch();
+  const vendor = useTypedSelector((state) => state.sabaPlus.vendorOptions);
 
   const gameOptions = Object.values(ProviderGameTypes[vendor.name]).map((gameType) => ({
     value: gameType,
@@ -51,7 +52,7 @@ const SabaPlusGroupVendorOption = ({ headerText }: Props) => {
     );
   };
 
-  const handleGameTypeChange = (selected: SingleValue<Option> | null) => {
+  const handleGameTypeChange = (selected: { value: GameType; label: string; } | null) => {
     dispatch(
       updateVendorOption({
         ...vendor,

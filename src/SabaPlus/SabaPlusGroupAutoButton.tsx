@@ -6,14 +6,16 @@ import {
   updateCurrentState,
 } from "../store/slices/sabaPlusSlice";
 import { sabaPlusLookup } from "../helper/sabaPlusHelper";
+import { useTypedDispatch, useTypedSelector } from "../store";
 type Props = {
   headerText: string;
   handleClick: (button: string) => void;
 };
+
 const SabaPlusGroupAutoButton = ({ headerText }: Props) => {
-  const dispatch = useDispatch();
-  const userId = useSelector((state) => state.userInfo.userId);
-  const vendorOptions = useSelector((state) => state.sabaPlus.vendorOptions);
+  const dispatch = useTypedDispatch();
+  const userId = useTypedSelector((state) => state.userInfo.userId);
+  const vendorOptions = useTypedSelector((state) => state.sabaPlus.vendorOptions);
 
   const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 

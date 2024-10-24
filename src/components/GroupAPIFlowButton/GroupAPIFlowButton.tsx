@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { betLookup } from "../../helper";
 import { updateCurrentState } from "../../store/slices/singleBetSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { useTypedDispatch, useTypedSelector } from "../../store";
 
 type Props = {
   headerText: string;
@@ -19,10 +20,10 @@ const GroupAPIFlowButton = ({
   handleClick,
   children,
 }: Props) => {
-  const dispatch = useDispatch();
+  const dispatch = useTypedDispatch();
 
-  const betRetryData = useSelector((state) => state.singleBet.betRetryData);
-  const tabValue = useSelector((state) => state.tabSimulator.tabValue);
+  const betRetryData = useTypedSelector((state) => state.singleBet.betRetryData);
+  const tabValue = useTypedSelector((state) => state.tabSimulator.tabValue);
 
   const handleOnReTryButtonOnClick = (key, retryId) => {
     dispatch(updateCurrentState({ type: key, retryId: retryId }));

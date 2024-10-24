@@ -8,9 +8,10 @@ import {
   settleBetApi,
   reSettleBetApi,
   unSettleBetApi,
+  updateBetDetailApi,
 } from "../services/api";
 import data from "../constant/Data.json";
-import store from "../store/store";
+import store from "../store";
 import { formatCurrentDate, formatCurrentDateTime } from "./datetimeHelper";
 import { nanoid } from "nanoid";
 
@@ -208,6 +209,10 @@ const getUnsettleBetData = () => {
   return betData;
 };
 
+const getTicketDetailData = () => {
+  return store?.getState()?.sabasportBetDetails?.selectedTicketDetail;
+};
+
 function generateRandomNumber(length) {
   if (length < 1) return "";
 
@@ -218,6 +223,11 @@ function generateRandomNumber(length) {
 }
 
 const singleBetLookup = {
+  ticketDetail: {
+    getSampleData: getTicketDetailData,
+    callApi: updateBetDetailApi,
+    label: "Get Bet Detail",
+  },
   placeBet: {
     getSampleData: getPlaceBetData,
     callApi: placeBetApi,

@@ -4,9 +4,10 @@ import {
   updateDataDisplay,
   updateTicketSelected,
 } from "../store/slices/betResultCheckSlice";
+import { useTypedDispatch, useTypedSelector } from "../store";
 const SabaPlusButtonGroup = () => {
-  const dispatch = useDispatch();
-  const { betResultTicket } = useSelector((state) => state.betResultCheck);
+  const dispatch = useTypedDispatch();
+  const { betResultTicket } = useTypedSelector((state) => state.betResultCheck);
   const handleOnClick = async (key) => {
     const response = await getBetResultCheckApi({ ticketNo: key });
     dispatch(updateTicketSelected(key));

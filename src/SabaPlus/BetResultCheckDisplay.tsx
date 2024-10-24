@@ -1,15 +1,16 @@
 import { useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "nanoid";
 import { updateBetResultCheckApi } from "../services/betResultCheckApi";
 import { updateDataDisplay } from "../store/slices/betResultCheckSlice";
+import { useTypedDispatch, useTypedSelector } from "../store";
 const BetResultCheckDisplay = () => {
-  const { dataDisplay, ticketSelected } = useSelector(
+  const dispatch = useTypedDispatch();
+
+  const { dataDisplay, ticketSelected } = useTypedSelector(
     (state) => state.betResultCheck
   );
 
   const requestRef = useRef(null);
-  const dispatch = useDispatch();
 
   const handleOnSubmit = async (requestRaw) => {
     const request = JSON.parse(requestRaw);

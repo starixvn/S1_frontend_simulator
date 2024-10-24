@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { sabaPlusLookup } from "../helper/sabaPlusHelper";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCurrentState } from "../store/slices/sabaPlusSlice";
+import { useTypedDispatch, useTypedSelector } from "../store";
 type Props = {
   headerText: string;
   buttons: string[];
@@ -18,9 +19,9 @@ const SabaPlusGroupAPIFlowButton = ({
   handleClick,
   children,
 }: Props) => {
-  const dispatch = useDispatch();
-  const betRetryData = useSelector((state) => state.sabaPlus.betRetryData);
-  const tabValue = useSelector((state) => state.tabSimulator.tabValue);
+  const dispatch = useTypedDispatch();
+  const betRetryData = useTypedSelector((state) => state.sabaPlus.betRetryData);
+  const tabValue = useTypedSelector((state) => state.tabSimulator.tabValue);
 
   const handleOnReTryButtonOnClick = (key, retryId) => {
     dispatch(updateCurrentState({ type: key, retryId: retryId }));

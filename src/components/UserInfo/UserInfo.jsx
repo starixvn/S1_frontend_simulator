@@ -1,17 +1,17 @@
-//@ts-nocheck
 import { useEffect, useState } from "react";
 import { getBalanceApi } from "../../services/api";
 import { GetBalance } from "../../constant/Data.json";
-import { useDispatch, useSelector } from "react-redux";
 import {
   setUserInfo,
   restartUserInfoStore,
 } from "../../store/slices/userInfoSlice";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
+import { useTypedDispatch, useTypedSelector } from "../../store";
 const UserInfo = () => {
-  const { userId, balance } = useSelector((state) => state.userInfo);
+  const dispatch = useTypedDispatch();
+  const { userId, balance } = useTypedSelector((state) => state.userInfo);
   const [userNameInput, setUserNameInput] = useState("");
-  const dispatch = useDispatch();
+  
 
   useEffect(() => {
     const validUserId = userId || localStorage.getItem("saba-simulator-userId");

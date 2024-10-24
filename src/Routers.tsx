@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import App from "./App";
 import SabaSW from "./pages/SabaSW";
 import SabaPlus from "./pages/SabaPlus";
-import store from "./store/store";
+import store from "./store";
 import { Provider } from "react-redux";
 const AppRoutes = () => (
   <Provider store={store}>
