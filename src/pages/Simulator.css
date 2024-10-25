@@ -290,7 +290,9 @@ input {
   padding: 0px;
   margin-left: 5px;
 }
-
+button:disabled {
+  opacity: 0.5;
+}
 #root {
   margin: 0 auto;
 

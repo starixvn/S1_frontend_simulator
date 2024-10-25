@@ -12,19 +12,6 @@ const SabaSportBetDetails = (props: Props) => {
   const userId = useTypedSelector((state) => state.userInfo.userId);
   const tabValue = useTypedSelector((state) => state.tabSimulator.tabValue);
 
-  useEffect(() => {
-    const fetchTicketDetails = async () => {
-      const response = await getBetDetailApi(lastVersionKey);
-  
-      dispatch(updateTicketDetails(response?.data?.betDetails))
-      if (response?.data?.betDetails?.length) {
-        dispatch(updateSelectedTicketDetails(response?.data?.betDetails[0]));
-      }
-    }
-
-    fetchTicketDetails()
-  }, [lastVersionKey, dispatch]);
-
   if (!userId || tabValue != 'manual') {
     return null;
   }
@@ -37,8 +24,15 @@ const SabaSportBetDetails = (props: Props) => {
     e.preventDefault();
     const response = await getBetDetailApi(lastVersionKey);
 
-    dispatch(updateTicketDetails(response?.data?.betDetails))
     dispatch(updateLastVersionKey(response.data?.last_version_key))
+  };
+
+  
+  const onFetchTickets = async (e) => {
+    e.preventDefault();
+    const response = await getBetDetailApi(lastVersionKey);
+
+    dispatch(updateTicketDetails(response?.data?.betDetails))
     if (response?.data?.betDetails?.length) {
       dispatch(updateSelectedTicketDetails(response?.data?.betDetails[0]));
     }
@@ -46,7 +40,7 @@ const SabaSportBetDetails = (props: Props) => {
 
   return (
     <div>
-      <div style={{ display: "flex", width: "max-content", gap: "10px" }}>
+      <form onSubmit={onFetchTickets} style={{ display: "flex", width: "max-content", gap: "10px" }}>
         <label
           title="Last Version Key"
           htmlFor="last-version-key"
@@ -68,7 +62,14 @@ const SabaSportBetDetails = (props: Props) => {
         >
           Sync
         </button>
-      </div>
+        <button
+          type="submit"
+          onClick={onFetchTickets}
+          style={{ backgroundColor: "#302f59", color: "white" }}
+        >
+          Fetch
+        </button>
+      </form>
     </div>
   );
 };
