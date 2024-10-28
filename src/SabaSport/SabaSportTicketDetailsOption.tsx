@@ -91,7 +91,7 @@ const SabaSportTicketDetailsOption = ({ headerText }: Props) => {
           isDisabled={isDisable}
           onChange={handleTicketChange}
         ></Select>
-        <button onClick={onGetBetDetail} className={`next betting-btn`} disabled={isDisable}>
+        <button onClick={onGetBetDetail} className="next betting-btn" disabled={isDisable}>
           Get Detail
         </button>
       </div>

@@ -25,7 +25,7 @@ const SabaSW = () => {
       <TabContext value={tabValue}>
         <SabaSportPopup />
         <DataDisplay>
-          <div style={{ display: "flex" }}>
+          <div className="flex">
             <SimulatorTab handleChange={handleChangeTab}></SimulatorTab>
             <SabaSportBetDetails />
           </div>
