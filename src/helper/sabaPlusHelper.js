@@ -9,15 +9,20 @@ import {
   freeSpinApi,
 } from "../services/sabaPlusApi";
 import { nanoid } from "nanoid";
+import { Provider } from "../constant/Provider";
 
 const getPlaceBetSBPlusData = () => {
   const operatorCustId = store?.getState().userInfo.userId;
   const gameId = generateRandomNumber(4);
-  const gameRoundId = `simulator_${gameId}_${generateRandomNumber(8)}`;
+  let gameRoundId = `simulator_${gameId}_${generateRandomNumber(8)}`;
   const ticketNo = `${gameId}|$|${operatorCustId}|$|${gameRoundId}`;
   const stake = generateRandomStake();
 
   const vendor = getProviderRandomAndGameType();
+  if (vendor.ProviderName == Provider.PP) { 
+    gameRoundId = gameRoundId.split("_")[2];
+  }
+
 
   const walletSiteTokenParts = spPlusData.placeBet.Payload.WalletSideToken.split('@');
   walletSiteTokenParts[0] = vendor.GameProviderCode;
@@ -50,10 +55,14 @@ const getPlaceBetSBPlusData = () => {
 const getPlaceFreeSpinSBPlusData = () => {
   const operatorCustId = store?.getState().userInfo.userId;
   const gameId = generateRandomNumber(4);
-  const gameRoundId = `simulator_${gameId}_${generateRandomNumber(8)}`;
+  let gameRoundId = `simulator_${gameId}_${generateRandomNumber(8)}`;
   const ticketNo = `${gameId}|$|${operatorCustId}|$|${gameRoundId}`;
 
   const vendor = getProviderRandomAndGameType();
+  if (vendor.ProviderName == Provider.PP) { 
+    gameRoundId = gameRoundId.split("_")[2];
+  }
+
   const walletSiteTokenParts = spPlusData.placeBet.Payload.WalletSideToken.split('@');
   walletSiteTokenParts[0] = vendor.GameProviderCode;
   const walletSiteToken = walletSiteTokenParts.join('@');
@@ -120,11 +129,15 @@ const getEndGameSBPlusData = () => {
 const getPlaceBetAndSettleSBPlusData = () => {
   const operatorCustId = store?.getState().userInfo.userId;
   const gameId = generateRandomNumber(4);
-  const gameRoundId = `simulator_${gameId}_${generateRandomNumber(8)}`;
+  let gameRoundId = `simulator_${gameId}_${generateRandomNumber(8)}`;
   const ticketNo = `${gameId}|$|${operatorCustId}|$|${gameRoundId}`;
   const stake = generateRandomStake();
 
   const vendor = getProviderRandomAndGameType();
+  if (vendor.ProviderName == Provider.PP) { 
+    gameRoundId = gameRoundId.split("_")[2];
+  }
+
   const walletSiteTokenParts = spPlusData.placeBet.Payload.WalletSideToken.split('@');
   walletSiteTokenParts[0] = vendor.GameProviderCode;
   const walletSiteToken = walletSiteTokenParts.join('@');
@@ -182,10 +195,13 @@ const getVoidSBPlusData = () => {
 const getFreeSpinSBPlusData = () => {
   const operatorCustId = store?.getState().userInfo.userId;
   const gameId = generateRandomNumber(4);
-  const gameRoundId = `simulator_${gameId}_${generateRandomNumber(8)}`;
+  let gameRoundId = `simulator_${gameId}_${generateRandomNumber(8)}`;
   const ticketNo = `${gameId}|$|${operatorCustId}|$|${gameRoundId}`;
 
   const vendor = getProviderRandomAndGameType();
+  if (vendor.ProviderName == Provider.PP) { 
+    gameRoundId = gameRoundId.split("_")[2];
+  }
 
   return {
     ...spPlusData.freeSpin,
