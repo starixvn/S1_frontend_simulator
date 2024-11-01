@@ -225,6 +225,20 @@ const getFreeSpinSBPlusData = () => {
   };
 };
 
+const getStandaloneVoidSBPlusData = () => {
+  const vendor = getProviderRandomAndGameType();
+
+  return {
+    ...spPlusData.voidGame,
+    Seq: `${nanoid(8)}-${nanoid(4)}-${nanoid(4)}-${nanoid(4)}-${nanoid(8)}`,
+    TimeStamp: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
+    Payload: {
+      ...spPlusData.voidGame.Payload,
+      GameType: vendor.GameType
+    },
+  };
+};
+
 const getPlaceBetData = () => {
   const clickedAction = store?.getState().sabaPlus.clickedButtons;
 
@@ -265,7 +279,7 @@ const getProviderRandomAndGameType = () => {
 
 const sabaPlusLookup = {
   standaloneVoid: {
-    getSampleData: () => spPlusData.voidGame,
+    getSampleData: getStandaloneVoidSBPlusData,
     callApi: voidGameApi,
     label: "Void",
   },
