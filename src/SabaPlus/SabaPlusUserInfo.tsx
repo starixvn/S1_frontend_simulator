@@ -8,6 +8,8 @@ import { balanceData } from "../constant/SabaPlusData.json";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { useNavigate } from "react-router-dom";
 import { useTypedDispatch, useTypedSelector } from "../store";
+import moment from "moment";
+import { nanoid } from "nanoid";
 
 const SabaPlusUserInfo = () => {
   const dispatch = useTypedDispatch();
@@ -26,6 +28,9 @@ const SabaPlusUserInfo = () => {
     if (validCustId) {
       const fetchBalance = async () => {
         balanceData.Payload.OperatorCustId = validCustId;
+        balanceData.TimeStamp = moment().utcOffset(-240).format("YYYY/MM/DD HH:mm:ss.SSS");
+        balanceData.Seq = `${nanoid(8)}-${nanoid(4)}-${nanoid(4)}-${nanoid(4)}-${nanoid(8)}`;
+
         const res = await getBalanceSabaPlusApi(balanceData);
 
         if (res.ErrorCode === 0) {
