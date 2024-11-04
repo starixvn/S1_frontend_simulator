@@ -11,6 +11,8 @@ import {
 import { nanoid } from "nanoid";
 import { Provider } from "../constant/Provider";
 
+const getServerTimeZone = () => moment().utcOffset(-240);
+
 const getPlaceBetSBPlusData = () => {
   const operatorCustId = store?.getState().userInfo.userId;
   const gameId = generateRandomNumber(4);
@@ -116,8 +118,8 @@ const getEndGameSBPlusData = () => {
           GameRoundId: GameRoundId,
           TicketNo: TicketNo,
           ActualStake: ActualStake,
-          SettleDate: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
-          SettleDateWithTz: moment().tz("UTC").format("YYYY-MM-DDTHH:mm:ssZ"),
+          SettleDate: getServerTimeZone().format("YYYY/MM/DD HH:mm:ss.SSS"),
+          SettleDateWithTz: getServerTimeZone().format("YYYY-MM-DDTHH:mm:ssZ"),
         },
       ],
     },
@@ -160,8 +162,8 @@ const getPlaceBetAndSettleSBPlusData = () => {
           TicketNo: ticketNo,
           Stake: stake,
           ActualStake: stake,
-          SettleDate: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
-          SettleDateWithTz: moment().tz("UTC").format("YYYY-MM-DDTHH:mm:ssZ"),
+          SettleDate: getServerTimeZone().format("YYYY/MM/DD HH:mm:ss.SSS"),
+          SettleDateWithTz: getServerTimeZone().format("YYYY-MM-DDTHH:mm:ssZ"),
         },
       ],
     },
@@ -218,7 +220,7 @@ const getFreeSpinSBPlusData = () => {
           GameRoundId: gameRoundId,
           TicketNo: ticketNo,
           Payout: generateRandomStake(),
-          SettleDate: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
+          SettleDate: getServerTimeZone().format("YYYY/MM/DD HH:mm:ss.SSS"),
         },
       ],
     },
