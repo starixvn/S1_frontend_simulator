@@ -213,6 +213,7 @@ const getFreeSpinSBPlusData = () => {
       ...spPlusData.freeSpin.Payload,
       OperatorCustId: operatorCustId,
       GameType: vendor.GameType,
+      GameProviderCode: vendor.GameProviderCode,
       BetDataSet: [
         {
           ...spPlusData.freeSpin.Payload.BetDataSet[0],
