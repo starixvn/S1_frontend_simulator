@@ -2,6 +2,7 @@
   "placeBet": {
     "TimeStamp": "2024/09/19 03:08:13.043",
     "Seq": "4034c713-2caa-4e6b-9c1a-07ffb621d726",
+    "OperatorKey": "ck03ijvk",
     "Payload": {
       "OperatorCustId": "",
       "WalletSideToken": "SABAPLUS-MAXPLAY@7600001@8a16e864-415d-41e1-80c8-e15bbcf5ea57",
@@ -28,6 +29,7 @@
   "voidGame": {
     "TimeStamp": "2024/09/27 05:36:03.825",
     "Seq": "f6a45a2b-d3da-4b8f-9c14-43ba59e364e9",
+    "OperatorKey": "ck03ijvk",
     "Payload": {
       "OperatorCustId": "4uo2mwf6dow8_test",
       "GameType": "FaChai",

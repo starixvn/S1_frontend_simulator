@@ -5,15 +5,15 @@ export enum Provider {
   FS = "FS",
   SBPLAY = "SBPLAY",
   WE = "WE",
+  AESEXY = "AESEXY",
   ALLBET = "ALLBET",
   PP = "PP",
   MAXPLAY = "MAXPLAY",
   LIVE22 = "LIVE22",
-  SIMULATOR = "SIM",
+  PG = "PG"
 }
 
 export enum GameType {
-  SIMULATOR = "Simulator",
   MAXGAME = "MaxGame",
   KENO = "Keno",
   LOTTERY = "Lottery",
@@ -28,12 +28,12 @@ export enum GameType {
   WORLDENTERTAINMENT = "WorldEntertainment",
   GTLIVE = "GTLive",
   ALLBET = "AllBet",
+  JILI = "JiLi",
   SEXYCASINO = "SexyCasino",
-  JILI = "JiLi"
+  PG = "PocketGames"
 }
 
 export const ProviderGameTypes = {
-  [Provider.SIMULATOR]: [GameType.SIMULATOR],
   [Provider.ALLBET]: [GameType.ALLBET],
   [Provider.FACHAI]: [GameType.FACHAI],
   [Provider.FS]: [GameType.FS],

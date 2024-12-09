@@ -7,26 +7,32 @@ import {
 import Nanoid from "~/utils/CustomNanoid";
 
 const requestPrefix = 'loadtest_'
+const getServerTimeZone = () => moment().utcOffset(-240);
 
-export const getBalance = ( operatorCustId ) => {
+export const getBalanceRequest = ( operatorCustId ) => {
   const balanceData = { ...spPlusData.balanceData };
   balanceData.Payload.OperatorCustId = operatorCustId;
+  balanceData.TimeStamp = moment().utcOffset(-240).format("YYYY/MM/DD HH:mm:ss.SSS");
+  balanceData.Seq = `${Nanoid(8)}-${Nanoid(4)}-${Nanoid(4)}-${Nanoid(4)}-${Nanoid(8)}`;
 
   return balanceData;
 }
 
 export const getPlaceBetSBPlusRequest = (operatorCustId: string) => {
   const gameId = generateRandomNumber(4);
-  const gameRoundId = `${requestPrefix}${gameId}_${generateRandomNumber(8)}`;
+  let gameRoundId = `${requestPrefix}${gameId}_${generateRandomNumber(8)}`;
   const ticketNo = `${gameId}|$|${operatorCustId}|$|${gameRoundId}`;
 
   const stake = generateRandomStake();
 
   const vendor = getProviderRandomAndGameType();
+  if (vendor.ProviderName == Provider.PP) { 
+    gameRoundId = gameRoundId.split("_")[2];
+  }
 
-  const walletSiteTokenParts =
-    spPlusData.placeBet.Payload.WalletSideToken.split("@");
+  const walletSiteTokenParts = spPlusData.placeBet.Payload.WalletSideToken.split("@");
   walletSiteTokenParts[0] = vendor.GameProviderCode;
+
   const walletSiteToken = walletSiteTokenParts.join("@");
 
   return {
@@ -55,12 +61,15 @@ export const getPlaceBetSBPlusRequest = (operatorCustId: string) => {
 
 export const getPlaceFreeSpinSBPlusRequest = (operatorCustId: string) => {
   const gameId = generateRandomNumber(4);
-  const gameRoundId = `${requestPrefix}${gameId}_${generateRandomNumber(8)}`;
+  let gameRoundId = `${requestPrefix}${gameId}_${generateRandomNumber(8)}`;
   const ticketNo = `${gameId}|$|${operatorCustId}|$|${gameRoundId}`;
 
   const vendor = getProviderRandomAndGameType();
-  const walletSiteTokenParts =
-    spPlusData.placeBet.Payload.WalletSideToken.split("@");
+  if (vendor.ProviderName == Provider.PP) { 
+    gameRoundId = gameRoundId.split("_")[2];
+  }
+
+  const walletSiteTokenParts = spPlusData.placeBet.Payload.WalletSideToken.split("@");
   walletSiteTokenParts[0] = vendor.GameProviderCode;
   const walletSiteToken = walletSiteTokenParts.join("@");
 
@@ -90,13 +99,16 @@ export const getPlaceFreeSpinSBPlusRequest = (operatorCustId: string) => {
 
 export const getPlaceBetAndSettleSBPlusRequest = (operatorCustId: string) => {
   const gameId = generateRandomNumber(4);
-  const gameRoundId = `${requestPrefix}${gameId}_${generateRandomNumber(8)}`;
+  let gameRoundId = `${requestPrefix}${gameId}_${generateRandomNumber(8)}`;
   const ticketNo = `${gameId}|$|${operatorCustId}|$|${gameRoundId}`;
   const stake = generateRandomStake();
 
   const vendor = getProviderRandomAndGameType();
-  const walletSiteTokenParts =
-    spPlusData.placeBet.Payload.WalletSideToken.split("@");
+  if (vendor.ProviderName == Provider.PP) { 
+    gameRoundId = gameRoundId.split("_")[2];
+  }
+
+  const walletSiteTokenParts = spPlusData.placeBet.Payload.WalletSideToken.split("@");
   walletSiteTokenParts[0] = vendor.GameProviderCode;
   const walletSiteToken = walletSiteTokenParts.join("@");
 
@@ -118,8 +130,8 @@ export const getPlaceBetAndSettleSBPlusRequest = (operatorCustId: string) => {
           TicketNo: ticketNo,
           Stake: stake,
           ActualStake: stake,
-          SettleDate: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
-          SettleDateWithTz: moment().tz("UTC").format("YYYY-MM-DDTHH:mm:ssZ"),
+          SettleDate: getServerTimeZone().format("YYYY/MM/DD HH:mm:ss.SSS"),
+          SettleDateWithTz: getServerTimeZone().format("YYYY-MM-DDTHH:mm:ssZ"),
         },
       ],
     },
@@ -145,8 +157,8 @@ export const getEndGameSBPlusRequest = (placeBetRequest) => {
           GameRoundId: GameRoundId,
           TicketNo: TicketNo,
           ActualStake: ActualStake,
-          SettleDate: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
-          SettleDateWithTz: moment().tz("UTC").format("YYYY-MM-DDTHH:mm:ssZ"),
+          SettleDate: getServerTimeZone().format("YYYY/MM/DD HH:mm:ss.SSS"),
+          SettleDateWithTz: getServerTimeZone().format("YYYY-MM-DDTHH:mm:ssZ"),
         },
       ],
     },
@@ -176,10 +188,13 @@ export const getVoidSBPlusRequest = (placeBetRequest) => {
 
 export const getFreeSpinSBPlusRequest = (operatorCustId: string) => {
   const gameId = generateRandomNumber(4);
-  const gameRoundId = `${requestPrefix}${gameId}_${generateRandomNumber(8)}`;
+  let gameRoundId = `${requestPrefix}${gameId}_${generateRandomNumber(8)}`;
   const ticketNo = `${gameId}|$|${operatorCustId}|$|${gameRoundId}`;
 
   const vendor = getProviderRandomAndGameType();
+  if (vendor.ProviderName == Provider.PP) { 
+    gameRoundId = gameRoundId.split("_")[2];
+  }
 
   return {
     ...spPlusData.freeSpin,
@@ -196,7 +211,7 @@ export const getFreeSpinSBPlusRequest = (operatorCustId: string) => {
           GameRoundId: gameRoundId,
           TicketNo: ticketNo,
           Payout: generateRandomStake(),
-          SettleDate: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
+          SettleDate: getServerTimeZone().format("YYYY/MM/DD HH:mm:ss.SSS"),
         },
       ],
     },

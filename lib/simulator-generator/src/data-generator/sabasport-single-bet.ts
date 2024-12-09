@@ -7,9 +7,9 @@ const betAmount = 1;
 
 export const getBalanceRequest = (userId: string) => {
   return {
-    key: Nanoid(10),
+    ...data.GetBalance,
     message: {
-      ...data.GetBalance,
+      ...data.GetBalance.message,
       UserId:  userId
     }
   }
