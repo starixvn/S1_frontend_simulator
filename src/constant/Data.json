@@ -8,40 +8,26 @@
       "Currency": 20,
       "BetTime": "2024-09-11T23:27:18.975-04:00",
       "UpdateTime": "2024-09-11T23:27:18.975-04:00",
-      "TotalBetAmount": 73,
+      "TotalBetAmount": 3,
       "IP": "202.78.231.34",
       "TsId": "",
       "BetFrom": "W001",
       "CreditAmount": 0,
-      "DebitAmount": 73,
+      "DebitAmount": 3,
       "VendorTransId": null,
       "Txns": [
         {
           "RefId": "4351400_1014_U",
           "ParlayType": "Parlay_System",
-          "BetAmount": 16,
+          "BetAmount": 2,
           "CreditAmount": 0,
-          "DebitAmount": 16,
+          "DebitAmount": 2,
           "Detail": [
             {
               "Type": 1,
               "Name": "Trebles",
-              "BetCount": 10,
-              "Stake": 1,
-              "Odds": null
-            },
-            {
-              "Type": 4,
-              "Name": "Fold4",
-              "BetCount": 5,
-              "Stake": 1,
-              "Odds": null
-            },
-            {
-              "Type": 7,
-              "Name": "Fold5",
               "BetCount": 1,
-              "Stake": 1,
+              "Stake": 2,
               "Odds": null
             }
           ]
@@ -55,18 +41,6 @@
           "Detail": [
             {
               "MatchId": 92318906
-            }
-          ]
-        },
-        {
-          "RefId": "4351400_1018_U",
-          "ParlayType": "SingleBet_ViaLucky",
-          "BetAmount": 1,
-          "CreditAmount": 0,
-          "DebitAmount": 1,
-          "Detail": [
-            {
-              "MatchId": 92318856
             }
           ]
         }
@@ -104,40 +78,6 @@
           "AwayName_en": "Argentina (V)",
           "BetTypeName_en": "Handicap",
           "MatchDateTime": "2024-09-12T00:15:00.000-04:00",
-          "BetRemark": ""
-        },
-        {
-          "MatchId": 92318856,
-          "HomeId": 674943,
-          "AwayId": 675431,
-          "HomeName": "Bahrain (V)",
-          "AwayName": "Indonesia (V)",
-          "KickOffTime": "2024-09-12T00:00:01.000-04:00",
-          "SportType": 1,
-          "SportTypeName": "Soccer",
-          "BetType": 1,
-          "BetTypeName": "Handicap",
-          "OddsId": 729707955,
-          "Odds": 1.95,
-          "OddsType": 3,
-          "BetChoice": "Bahrain (V)",
-          "BetChoice_en": "Bahrain (V)",
-          "LeagueId": 95731,
-          "LeagueName": "SABA INTERNATIONAL FRIENDLY Virtual PES 21 - 20 Mins Play",
-          "IsLive": false,
-          "Point": "0.25",
-          "Point2": "",
-          "BetTeam": "h",
-          "HomeScore": 0,
-          "AwayScore": 0,
-          "BaStatus": false,
-          "Excluding": "",
-          "LeagueName_en": "SABA INTERNATIONAL FRIENDLY Virtual PES 21 - 20 Mins Play",
-          "SportTypeName_en": "Soccer",
-          "HomeName_en": "Bahrain (V)",
-          "AwayName_en": "Indonesia (V)",
-          "BetTypeName_en": "Handicap",
-          "MatchDateTime": "2024-09-12T00:00:00.000-04:00",
           "BetRemark": ""
         }
       ]
