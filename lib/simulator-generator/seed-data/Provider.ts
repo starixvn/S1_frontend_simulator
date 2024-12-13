@@ -1,16 +1,17 @@
 export enum Provider {
-  JILI = "JILI",
-  FACHAI = "FACHAI",
-  UUSLOTS = "UUSLOTS",
-  FS = "FS",
-  SBPLAY = "SBPLAY",
-  WE = "WE",
-  AESEXY = "AESEXY",
   ALLBET = "ALLBET",
-  PP = "PP",
-  MAXPLAY = "MAXPLAY",
+  FACHAI = "FACHAI",
+  FS = "FS",
+  //JILI = "JILI",
   LIVE22 = "LIVE22",
-  PG = "PG"
+  MAXPLAY = "MAXPLAY",
+  PP = "PP",
+  SBPLAY = "SBPLAY",
+  UUSLOTS = "UUSLOTS",
+  WE = "WE",
+
+  // AESEXY = "AESEXY",
+  // PG = "PG"
 }
 
 export enum GameType {
@@ -28,7 +29,7 @@ export enum GameType {
   WORLDENTERTAINMENT = "WorldEntertainment",
   GTLIVE = "GTLive",
   ALLBET = "AllBet",
-  JILI = "JiLi",
+  //JILI = "JiLi",
   SEXYCASINO = "SexyCasino",
   PG = "PocketGames"
 }
@@ -37,7 +38,7 @@ export const ProviderGameTypes = {
   [Provider.ALLBET]: [GameType.ALLBET],
   [Provider.FACHAI]: [GameType.FACHAI],
   [Provider.FS]: [GameType.FS],
-  [Provider.JILI]: [GameType.JILI],
+  //[Provider.JILI]: [GameType.JILI],
   [Provider.LIVE22]: [GameType.LIVE22],
   [Provider.MAXPLAY]: [GameType.KENO, GameType.LOTTERY, GameType.MAXGAME, GameType.TABLEGAME],
   [Provider.PP]: [GameType.PRAGMATIC_PLAY, GameType.PRAGMATIC_PLAY_CASINO],

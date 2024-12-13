@@ -2,7 +2,7 @@
   "placeBet": {
     "TimeStamp": "2024/09/19 03:08:13.043",
     "Seq": "4034c713-2caa-4e6b-9c1a-07ffb621d726",
-    "OperatorKey": "ck03ijvk",
+    "OperatorKey": "chii0lcy",
     "Payload": {
       "OperatorCustId": "",
       "WalletSideToken": "SABAPLUS-MAXPLAY@7600001@8a16e864-415d-41e1-80c8-e15bbcf5ea57",
@@ -29,7 +29,7 @@
   "voidGame": {
     "TimeStamp": "2024/09/27 05:36:03.825",
     "Seq": "f6a45a2b-d3da-4b8f-9c14-43ba59e364e9",
-    "OperatorKey": "ck03ijvk",
+    "OperatorKey": "chii0lcy",
     "Payload": {
       "OperatorCustId": "4uo2mwf6dow8_test",
       "GameType": "FaChai",
@@ -47,6 +47,7 @@
   },
   "endGame": {
     "TimeStamp": "2024/09/19 03:08:19.723",
+    "OperatorKey": "chii0lcy",
     "Seq": "b4f0ab88-2b13-4faf-9543-09386f22eb58",
     "Payload": {
       "OperatorCustId": "",
@@ -71,6 +72,7 @@
   },
   "placeBetAndSettle": {
     "TimeStamp": "2024/09/18 07:12:01.273",
+    "OperatorKey": "chii0lcy",
     "Seq": "7480dfd7-0d61-4375-b099-d4c6109e5930",
     "Payload": {
       "OperatorCustId": "",
@@ -97,6 +99,7 @@
   },
   "freeSpin": {
     "TimeStamp": "2024/09/18 07:12:01.273",
+    "OperatorKey": "chii0lcy",
     "Seq": "7480dfd7-0d61-4375-b099-d4c6109e5930",
     "Payload": {
       "OperatorCustId": "",
@@ -122,6 +125,7 @@
   "balanceData": {
     "TimeStamp": "2024/09/19 03:35:35.079",
     "Seq": "599c59ef-941a-49ac-86de-07fc439d782c",
+    "OperatorKey": "chii0lcy",
     "Payload": {
       "OperatorCustId": "",
       "WalletSideToken": "SABAPLUS-MAXPLAY@7600001@8a16e864-415d-41e1-80c8-e15bbcf5ea57",
@@ -130,6 +134,7 @@
   },
   "placeFreeSpin": {
     "TimeStamp": "2024/09/21 04:31:42.116",
+    "OperatorKey": "chii0lcy",
     "Seq": "bbfa4a0d-0282-4328-bed7-3bb74d155325",
     "Payload": {
       "OperatorCustId": "",

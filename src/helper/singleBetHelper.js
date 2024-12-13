@@ -15,12 +15,15 @@ import store from "../store";
 import { formatCurrentDate, formatCurrentDateTime } from "./datetimeHelper";
 import { nanoid } from "nanoid";
 
+const operatorKey = import.meta.env.VITE_SABA_SPORT_OPERATOR_KEY;
+
 const getPlaceBetData = () => {
   let betAmount = Math.round(Math.random() * 9 * 100) / 100;
   const simulatedTime = formatCurrentDateTime();
   const userId = store.getState().userInfo.userId;
   const betData = {
     ...data.PlaceBet,
+    key: operatorKey,
     message: {
       ...data.PlaceBet.message,
       BetAmount: betAmount,
@@ -48,6 +51,7 @@ const getConfirmBetData = () => {
 
   const betData = {
     ...data.ConfirmBet,
+    key: operatorKey,
     message: {
       ...data.ConfirmBet.message,
       OperationId: nanoid(20),
@@ -78,6 +82,7 @@ const getCancelBetData = () => {
   const simulatedTime = formatCurrentDateTime();
   const betData = {
     ...data.CancelBet,
+    key: operatorKey,
     message: {
       ...data.CancelBet.message,
       OperationId: nanoid(20),
@@ -114,6 +119,7 @@ const getSettleBetData = () => {
   }
   const betData = {
     ...data.Settle,
+    key: operatorKey,
     message: {
       ...data.Settle.message,
       OperationId: nanoid(20),
@@ -158,6 +164,7 @@ const getResettleBetData = () => {
         };
   const betData = {
     ...data.ReSettle,
+    key: operatorKey,
     message: {
       ...data.ReSettle.message,
       OperationId: nanoid(20),
@@ -189,6 +196,7 @@ const getUnsettleBetData = () => {
   const { Payout, RefId, Status } = settleBetData.request?.message.Txns[0];
   const betData = {
     ...data.UnSettle,
+    key: operatorKey,
     message: {
       ...data.UnSettle.message,
       OperationId: nanoid(20),

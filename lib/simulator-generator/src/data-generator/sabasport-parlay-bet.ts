@@ -133,7 +133,7 @@ export const getResettleParlayBetRequest = (
       ...data.ReSettle.message,
       OperationId: Nanoid(20),
       Txns: placeBetRequest.message.Txns.map((item, index) => {
-        const { Payout, Status } = settleBetRequest.message.Txns[index];
+        const { Payout, Status, SettlementTime } = settleBetRequest.message.Txns[index];
         const finalBetData =
           Status === "won"
             ? {
@@ -155,6 +155,7 @@ export const getResettleParlayBetRequest = (
           UserId: UserId,
           RefId: confirmBetRequest.message.Txns[index].RefId,
           TxId: confirmBetRequest.message.Txns[index].TxId,
+          SettlementTime: SettlementTime
         };
       }),
     },

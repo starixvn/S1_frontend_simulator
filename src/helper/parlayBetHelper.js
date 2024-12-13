@@ -14,6 +14,8 @@ import store from "../store";
 import { nanoid } from "nanoid";
 import { formatCurrentDateTime } from "./datetimeHelper";
 
+const operatorKey = import.meta.env.VITE_SABA_SPORT_OPERATOR_KEY;
+
 const getPlaceBetParlayData = () => {
   const betAmount = Math.round(Math.random() * 9 * 100) / 100;
   const shouldSetCreditAmount = Math.random() >= 0.5;
@@ -22,7 +24,7 @@ const getPlaceBetParlayData = () => {
   const now = formatCurrentDateTime();
 
   const betData = {
-    key: 'y2g53zl9g4',
+    key: operatorKey,
     message: {
       ...data.PlaceBetParlay.message,
       OperationId: nanoid(20),
@@ -59,7 +61,7 @@ const getConfirmBetParlayData = () => {
   });
 
   return {
-    key: 'y2g53zl9g4',
+    key: operatorKey,
     message: {
       ...data.ConfirmBetParlay.message,
       OperationId: nanoid(20),
@@ -85,7 +87,7 @@ const getCancelBetParlayData = () => {
   const placeBetData = store?.getState()?.singleBet?.betData?.placeBetParlay;
   const { UserId, CreditAmount, DebitAmount } = placeBetData.request?.message;
   const betData = {
-    key: 'y2g53zl9g4',
+    key: operatorKey,
     message: {
       ...data.CancelBet.message,
       OperationId: nanoid(20),
@@ -109,14 +111,13 @@ const getSettleBetParlayData = () => {
   const { UserId } = placeBetData.request?.message;
 
   const betData = {
-    key: 'y2g53zl9g4',
+    key: operatorKey,
 
     message: {
       ...data.Settle.message,
       OperationId: nanoid(20),
       Txns: placeBetData.request.message.Txns.map((item, index) => {
-        let actualAmount =
-          confirmBetParlay.request.message.Txns[index].ActualAmount;
+        let actualAmount = confirmBetParlay.request.message.Txns[index].ActualAmount;
         const odds = confirmBetParlay.request.message.Txns[index].Odds;
         const isWon = data.Settle.message.Txns[0].Status === "won";
         if (Boolean(odds) && isWon) {
@@ -146,12 +147,12 @@ const getResettleParlayBetData = () => {
     store?.getState()?.singleBet?.betData?.settleBetParlay;
   const { UserId } = placeBetData.request?.message;
   const betData = {
-    key: 'y2g53zl9g4',
+    key: operatorKey,
     message: {
       ...data.ReSettle.message,
       OperationId: nanoid(20),
       Txns: placeBetData.request.message.Txns.map((item, index) => {
-        const { Payout, RefId, Status } =
+        const { Payout, RefId, Status, SettlementTime } =
           settleBetParlay.request?.message.Txns[index];
         const finalBetData =
           Status === "won"
@@ -174,6 +175,7 @@ const getResettleParlayBetData = () => {
           UserId: UserId,
           RefId: confirmBetParlay.request.message.Txns[index].RefId,
           TxId: confirmBetParlay.request.message.Txns[index].TxId,
+          SettlementTime: SettlementTime
         };
       }),
     },
@@ -188,7 +190,7 @@ const getUnsettleParlayBetData = () => {
 
   const { UserId } = placeBetData.request?.message;
   const betData = {
-    key: 'y2g53zl9g4',
+    key: operatorKey,
     message: {
       ...data.UnSettle.message,
       OperationId: nanoid(20),

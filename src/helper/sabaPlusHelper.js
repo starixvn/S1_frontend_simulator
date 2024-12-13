@@ -11,6 +11,8 @@ import {
 import { nanoid } from "nanoid";
 import { Provider } from "../constant/Provider";
 
+const operatorKey = import.meta.env.VITE_SABA_PLUS_OPERATOR_KEY;
+
 const getServerTimeZone = () => moment().utcOffset(-240);
 
 const getPlaceBetSBPlusData = () => {
@@ -25,13 +27,13 @@ const getPlaceBetSBPlusData = () => {
     gameRoundId = gameRoundId.split("_")[2];
   }
 
-
   const walletSiteTokenParts = spPlusData.placeBet.Payload.WalletSideToken.split('@');
   walletSiteTokenParts[0] = vendor.GameProviderCode;
   const walletSiteToken = walletSiteTokenParts.join('@');
 
   return {
     ...spPlusData.placeBet,
+    OperatorKey: operatorKey,
     Seq: `${nanoid(8)}-${nanoid(4)}-${nanoid(4)}-${nanoid(4)}-${nanoid(8)}`,
     TimeStamp: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
     Payload: {
@@ -71,6 +73,7 @@ const getPlaceFreeSpinSBPlusData = () => {
 
   return {
     ...spPlusData.placeFreeSpin,
+    OperatorKey: operatorKey,
     Seq: `${nanoid(8)}-${nanoid(4)}-${nanoid(4)}-${nanoid(4)}-${nanoid(8)}`,
     TimeStamp: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
     Payload: {
@@ -105,6 +108,7 @@ const getEndGameSBPlusData = () => {
 
   const endGameData = {
     ...spPlusData.endGame,
+    OperatorKey: operatorKey,
     Seq: `${nanoid(8)}-${nanoid(4)}-${nanoid(4)}-${nanoid(4)}-${nanoid(8)}`,
     TimeStamp: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
     Payload: {
@@ -146,6 +150,7 @@ const getPlaceBetAndSettleSBPlusData = () => {
 
   return {
     ...spPlusData.placeBetAndSettle,
+    OperatorKey: operatorKey,
     Seq: `${nanoid(8)}-${nanoid(4)}-${nanoid(4)}-${nanoid(4)}-${nanoid(8)}`,
     TimeStamp: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
     Payload: {
@@ -178,6 +183,7 @@ const getVoidSBPlusData = () => {
 
   return {
     ...spPlusData.voidGame,
+    OperatorKey: operatorKey,
     Seq: `${nanoid(8)}-${nanoid(4)}-${nanoid(4)}-${nanoid(4)}-${nanoid(8)}`,
     TimeStamp: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
     Payload: {
@@ -207,6 +213,7 @@ const getFreeSpinSBPlusData = () => {
 
   return {
     ...spPlusData.freeSpin,
+    OperatorKey: operatorKey,
     Seq: `${nanoid(8)}-${nanoid(4)}-${nanoid(4)}-${nanoid(4)}-${nanoid(8)}`,
     TimeStamp: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
     Payload: {
@@ -233,6 +240,7 @@ const getStandaloneVoidSBPlusData = () => {
 
   return {
     ...spPlusData.voidGame,
+    OperatorKey: operatorKey,
     Seq: `${nanoid(8)}-${nanoid(4)}-${nanoid(4)}-${nanoid(4)}-${nanoid(8)}`,
     TimeStamp: moment().tz("UTC").format("YYYY/MM/DD HH:mm:ss.SSS"),
     Payload: {

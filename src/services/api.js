@@ -9,7 +9,7 @@ export const getBetDetailApi = async (lastVersionKey) => {
     params.append("version_key", lastVersionKey);
 
     const response = await axios.post(
-      `${apiUrl}/api/Simulator/GetBetDetail`,
+      `${apiUrl}/api/SabaSport/GetBetDetail`,
       params
     );
 
@@ -40,7 +40,7 @@ export const updateBetDetailApi = async (rawTicket) => {
     ticket.settlement_time = ticket.settlement_time ?? '';
     ticket.ParlayData = ticket.ParlayData ?? {};
     const response = await axios.post(
-      `${apiUrl}/api/Simulator/UpdateBetDetail`,
+      `${apiUrl}/api/SabaSport/UpdateBetDetail`,
       ticket,
       {
         headers: {
@@ -59,7 +59,7 @@ export const updateBetDetailApi = async (rawTicket) => {
 export const placeBetParlayApi = async (betData) => {
   try {
     const response = await axios.post(
-      `${apiUrl}/api/Simulator/PlaceBetParlay`,
+      `${apiUrl}/api/SabaSport/PlaceBetParlay`,
       betData,
       {
         headers: {
@@ -77,7 +77,7 @@ export const placeBetParlayApi = async (betData) => {
 export const placeBetApi = async (betData) => {
   try {
     const response = await axios.post(
-      `${apiUrl}/api/Simulator/PlaceBet`,
+      `${apiUrl}/api/SabaSport/PlaceBet`,
       betData,
       {
         headers: {
@@ -95,7 +95,7 @@ export const placeBetApi = async (betData) => {
 export const confirmBetParlayApi = async (betData) => {
   try {
     const response = await axios.post(
-      `${apiUrl}/api/Simulator/ConfirmBetParlay`,
+      `${apiUrl}/api/SabaSport/ConfirmBetParlay`,
       betData,
       {
         headers: {
@@ -113,7 +113,7 @@ export const confirmBetParlayApi = async (betData) => {
 export const confirmBetApi = async (betData) => {
   try {
     const response = await axios.post(
-      `${apiUrl}/api/Simulator/ConfirmBet`,
+      `${apiUrl}/api/SabaSport/ConfirmBet`,
       betData,
       {
         headers: {
@@ -131,7 +131,7 @@ export const confirmBetApi = async (betData) => {
 export const canCelBetApi = async (betData) => {
   try {
     const response = await axios.post(
-      `${apiUrl}/api/Simulator/CancelBet`,
+      `${apiUrl}/api/SabaSport/CancelBet`,
       betData,
       {
         headers: {
@@ -149,7 +149,7 @@ export const canCelBetApi = async (betData) => {
 export const getBalanceApi = async (data) => {
   try {
     const response = await axios.post(
-      `${apiUrl}/api/Simulator/getBalance`,
+      `${apiUrl}/api/SabaSport/getBalance`,
       data,
       {
         headers: {
@@ -166,7 +166,7 @@ export const getBalanceApi = async (data) => {
 
 export const settleBetApi = async (data) => {
   try {
-    const response = await axios.post(`${apiUrl}/api/Simulator/settle`, data, {
+    const response = await axios.post(`${apiUrl}/api/SabaSport/settle`, data, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -181,7 +181,7 @@ export const settleBetApi = async (data) => {
 export const reSettleBetApi = async (data) => {
   try {
     const response = await axios.post(
-      `${apiUrl}/api/Simulator/resettle`,
+      `${apiUrl}/api/SabaSport/resettle`,
       data,
       {
         headers: {
@@ -199,7 +199,7 @@ export const reSettleBetApi = async (data) => {
 export const unSettleBetApi = async (data) => {
   try {
     const response = await axios.post(
-      `${apiUrl}/api/Simulator/unsettle`,
+      `${apiUrl}/api/SabaSport/unsettle`,
       data,
       {
         headers: {

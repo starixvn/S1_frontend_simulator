@@ -18,6 +18,20 @@ export const getBalanceRequest = ( operatorCustId ) => {
   return balanceData;
 }
 
+
+export const getPlayerInfoRequest = ( {operatorCustId, gameType, gameId} ) => {
+  return {
+    Seq: `${Nanoid(8)}-${Nanoid(4)}-${Nanoid(4)}-${Nanoid(4)}-${Nanoid(8)}`,
+    Timestamp: moment().utcOffset(-240).format("YYYY/MM/DD HH:mm:ss.SSS"),
+    OperatorKey: "ck03ijvk",
+    Payload: {
+      OperatorCustId: operatorCustId,
+      GameType: gameType,
+      WalletSideToken: 'SABAPLUS-MAXPLAY@7600001@8a16e864-415d-41e1-80c8-e15bbcf5ea57'
+    }
+  };
+}
+
 export const getPlaceBetSBPlusRequest = (operatorCustId: string) => {
   const gameId = generateRandomNumber(4);
   let gameRoundId = `${requestPrefix}${gameId}_${generateRandomNumber(8)}`;
@@ -231,11 +245,13 @@ const generateRandomStake = () => {
 
 const getProviderRandomAndGameType = () => {
   const providerKeys = Object.values(Provider);
-  const randomProvider = providerKeys[Math.floor(Math.random() * providerKeys.length)];
+  //const randomProvider = providerKeys[Math.floor(Math.random() * providerKeys.length)];
+  const randomProvider = Provider.MAXPLAY;
 
   const gameTypes = ProviderGameTypes[randomProvider];
-  const randomGameType = gameTypes[Math.floor(Math.random() * gameTypes.length)];
-
+  //const randomGameType = gameTypes[Math.floor(Math.random() * gameTypes.length)];
+  const randomGameType = gameTypes[1];
+  
   return {
     ProviderName: randomProvider,
     GameProviderCode: `SABAPLUS-${randomProvider}`,
