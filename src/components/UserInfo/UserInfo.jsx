@@ -7,6 +7,9 @@ import {
 } from "../../store/slices/userInfoSlice";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 import { useTypedDispatch, useTypedSelector } from "../../store";
+
+const operatorKey = import.meta.env.VITE_SABA_SPORT_OPERATOR_KEY;
+
 const UserInfo = () => {
   const dispatch = useTypedDispatch();
   const { userId, balance } = useTypedSelector((state) => state.userInfo);
@@ -19,6 +22,7 @@ const UserInfo = () => {
     if (validUserId) {
       const fetchBalance = async () => {
         GetBalance.message.UserId = validUserId;
+        GetBalance.key = operatorKey;
         const res = await getBalanceApi(GetBalance);
         if (res.status === "0") {
           dispatch(

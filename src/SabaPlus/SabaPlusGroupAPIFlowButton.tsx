@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { sabaPlusLookup } from "../helper/sabaPlusHelper";
-import { useSelector, useDispatch } from "react-redux";
 import { updateCurrentState } from "../store/slices/sabaPlusSlice";
 import { useTypedDispatch, useTypedSelector } from "../store";
 type Props = {

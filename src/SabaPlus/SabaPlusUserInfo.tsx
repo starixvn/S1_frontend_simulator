@@ -11,6 +11,8 @@ import { useTypedDispatch, useTypedSelector } from "../store";
 import moment from "moment";
 import { nanoid } from "nanoid";
 
+const operatorKey = import.meta.env.VITE_SABA_PLUS_OPERATOR_KEY;
+
 const SabaPlusUserInfo = () => {
   const dispatch = useTypedDispatch();
 
@@ -30,6 +32,7 @@ const SabaPlusUserInfo = () => {
         balanceData.Payload.OperatorCustId = validCustId;
         balanceData.TimeStamp = moment().utcOffset(-240).format("YYYY/MM/DD HH:mm:ss.SSS");
         balanceData.Seq = `${nanoid(8)}-${nanoid(4)}-${nanoid(4)}-${nanoid(4)}-${nanoid(8)}`;
+        balanceData.OperatorKey = operatorKey;
 
         const res = await getBalanceSabaPlusApi(balanceData);
 
