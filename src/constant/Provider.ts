@@ -10,7 +10,11 @@ export enum Provider {
   PP = "PP",
   MAXPLAY = "MAXPLAY",
   LIVE22 = "LIVE22",
-  PG = "PG"
+  PG = "PG",
+  NextSpin = "Nextspin",
+  YeeBet = "YeeBet",
+  OnGaming = "ON Casino",
+  SAGaming = "SA Gaming",
 }
 
 export enum GameType {
@@ -30,7 +34,12 @@ export enum GameType {
   ALLBET = "AllBet",
   JILI = "JiLi",
   SEXYCASINO = "SexyCasino",
-  PG = "PocketGames"
+  PG = "PocketGames",
+  NextSpin = "Nextspin",
+  YeeBet = "YeeBet",
+  OnGaming = "ON Casino",
+  SAGaming = "SA Gaming",
+  
 }
 
 export const ProviderGameTypes = {
@@ -45,5 +54,9 @@ export const ProviderGameTypes = {
   [Provider.SBPLAY]: [GameType.SABAPLAY],
   [Provider.UUSLOTS]: [GameType.UUSLOTS],
   [Provider.WE]: [GameType.WORLDENTERTAINMENT],
-  [Provider.PG]: [GameType.PG]
+  [Provider.PG]: [GameType.PG],
+  [Provider.NextSpin]: [GameType.NextSpin],
+  [Provider.YeeBet]: [GameType.YeeBet],
+  [Provider.OnGaming]: [GameType.OnGaming],
+  [Provider.SAGaming]: [GameType.SAGaming],
 };
