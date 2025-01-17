@@ -8,7 +8,7 @@ export const getPlaceBetParlayRequest = (userId: string) => {
   const now = DateHelper.formatCurrentDateTime();
 
   const betData = {
-    key: 'y2g53zl9g4',
+    ...data.PlaceBetParlay,
     message: {
       ...data.PlaceBetParlay.message,
       OperationId: Nanoid(20),
@@ -44,7 +44,7 @@ export const getConfirmBetParlayRequest = (
   });
 
   return {
-    key: 'y2g53zl9g4',
+    ...data.ConfirmBetParlay,
     message: {
       ...data.ConfirmBetParlay.message,
       OperationId: Nanoid(20),
@@ -69,7 +69,7 @@ export const getCancelBetParlayRequest = (placeBetRequest) => {
   const { UserId } = placeBetRequest.message;
 
   const betData = {
-    key: 'y2g53zl9g4',
+    ...data.CancelBet,
     message: {
       ...data.CancelBet.message,
       OperationId: Nanoid(20),
@@ -92,7 +92,7 @@ export const getSettleBetParlayRequest = (
   const { UserId } = placeBetRequest.message;
 
   const betData = {
-    key: 'y2g53zl9g4',
+    ...data.Settle,
 
     message: {
       ...data.Settle.message,
@@ -128,7 +128,7 @@ export const getResettleParlayBetRequest = (
   const { UserId } = placeBetRequest.message;
 
   const betData = {
-    key: 'y2g53zl9g4',
+    ...data.ReSettle,
     message: {
       ...data.ReSettle.message,
       OperationId: Nanoid(20),
@@ -170,7 +170,7 @@ export const getUnsettleParlayBetRequest = (
   const { UserId } = placeBetRequest.message;
 
   const betData = {
-    key: 'y2g53zl9g4',
+    ...data.UnSettle,
     message: {
       ...data.UnSettle.message,
       OperationId: Nanoid(20),

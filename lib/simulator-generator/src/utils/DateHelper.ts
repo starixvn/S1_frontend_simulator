@@ -1,3 +1,4 @@
+// add parameter which config timezone to -4
 export const formatCurrentDateTime = () => {
   const now = new Date();
   const utc = now.getTime() + now.getTimezoneOffset() * 60000;

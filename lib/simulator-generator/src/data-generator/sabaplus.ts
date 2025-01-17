@@ -23,7 +23,7 @@ export const getPlayerInfoRequest = ( {operatorCustId, gameType, gameId} ) => {
   return {
     Seq: `${Nanoid(8)}-${Nanoid(4)}-${Nanoid(4)}-${Nanoid(4)}-${Nanoid(8)}`,
     Timestamp: moment().utcOffset(-240).format("YYYY/MM/DD HH:mm:ss.SSS"),
-    OperatorKey: "ck03ijvk",
+    OperatorKey: spPlusData.balanceData.OperatorKey,
     Payload: {
       OperatorCustId: operatorCustId,
       GameType: gameType,
@@ -245,12 +245,12 @@ const generateRandomStake = () => {
 
 const getProviderRandomAndGameType = () => {
   const providerKeys = Object.values(Provider);
-  //const randomProvider = providerKeys[Math.floor(Math.random() * providerKeys.length)];
-  const randomProvider = Provider.MAXPLAY;
+  const randomProvider = providerKeys[Math.floor(Math.random() * providerKeys.length)];
+  //const randomProvider = Provider.ALLBET;
 
   const gameTypes = ProviderGameTypes[randomProvider];
-  //const randomGameType = gameTypes[Math.floor(Math.random() * gameTypes.length)];
-  const randomGameType = gameTypes[1];
+  const randomGameType = gameTypes[Math.floor(Math.random() * gameTypes.length)];
+  //const randomGameType = gameTypes[0];
   
   return {
     ProviderName: randomProvider,
